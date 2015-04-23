@@ -1,0 +1,3 @@
+[run]
+source = apps/core
+omit = apps/core/test*.py, apps/core/migrations/*.py

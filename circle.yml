@@ -1,0 +1,44 @@
+machine:
+  timezone:
+    America/Denver
+
+  # Version of ruby to use
+  python:
+    version:
+      2.7.5
+
+  environment:
+    LK_ENV: test
+
+dependencies:
+  pre:
+    - pip install -r misc/requirements.txt
+
+test:
+  override:
+    - coverage run manage.py test
+  post:
+    - coverage html -d $CIRCLE_ARTIFACTS
+
+## Customize deployment commands
+# deployment:
+#   staging:
+#     branch: master
+#     heroku:
+#       appname: foo-bar-123
+
+# deployment:
+#   production:
+#     branch: master
+#     commands:
+#       - ./deploy-to-production.sh
+#   staging:
+#     branch: staging
+#     commands:
+#       - ./deploy-to-staging.sh
+
+## Custom notifications
+# notify:
+#   webhooks:
+#     # A list of hashes representing hooks. Only the url field is supported.
+#     - url: https://someurl.com/hooks/circle
